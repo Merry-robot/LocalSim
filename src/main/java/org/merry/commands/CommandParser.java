@@ -36,7 +36,7 @@ class ExitCommand implements CommandInterface {
 }
 
 @Parameters(commandNames = {"FS", "fs"}, commandDescription = "Instructs an aircraft to make a full stop on the assigned runway")
-class FullStopCommand implements CommandInterface {
+class FSCommand implements CommandInterface {
     @Parameter(description = "Runway to land on", required = false)
     private List<String> runway;
 
@@ -68,7 +68,7 @@ public class CommandParser {
 
         CTOCommand cto = new CTOCommand();
         ExitCommand exit = new ExitCommand();
-        FullStopCommand fs = new FullStopCommand();
+        FSCommand fs = new FSCommand();
         TGCommand tg = new TGCommand();
 
         commander.addCommand(cto);
@@ -106,7 +106,7 @@ public class CommandParser {
             outputArea.setEditable(false);
 
             executeButton.addActionListener(e -> {
-                String input = commandInput.getText();
+                String input = commandInput.getText().toUpperCase();
                 if (!input.isEmpty()) {
                     String[] parts = input.split(" ");
                     String commandName = parts[0];
